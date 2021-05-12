@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ImageBackground, Dimensions, StyleSheet, TouchableOpacity, Vibration } from 'react-native'
+import { View, Text, ImageBackground, Dimensions, StyleSheet, TouchableOpacity, Vibration, Alert } from 'react-native'
 import { resetNum, countNum } from '../redux/actions/action'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -18,6 +18,27 @@ export default function zikirmatik({ save, vibBool }) {
         }
     }
 
+    const Sure = () => {
+        Alert.alert(
+            "Uyarı",
+            "Sayacı sıfırlamak istediğinizden emin misiniz ?",
+            [
+                {
+                    text: "Hayır",
+                    //onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "Evet Sıfırla",
+                    onPress: () => {
+                        Alert.alert("Sayaç Sıfırlandı")
+                        dispatch(resetNum())
+                    }
+                }
+            ]
+        )
+    }
+
     const dispatch = useDispatch()
     return (
 
@@ -34,7 +55,7 @@ export default function zikirmatik({ save, vibBool }) {
 
                 <TouchableOpacity
                     style={styles.button2}
-                    onPress={() => dispatch(resetNum())}>
+                    onPress={Sure}>
 
                 </TouchableOpacity>
 

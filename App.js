@@ -1,20 +1,21 @@
 import React from 'react'
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import Drawer from './src/components/Drawer'
-import { createStore } from 'redux';
-import { reducer } from './src/redux/reducers'
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import reducerStore from './src/redux/store/store'
 
-
-
-const store = createStore(reducer);
+const { store, persistor } = reducerStore();
 
 export default function App() {
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Drawer />
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Drawer />
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   )
 }

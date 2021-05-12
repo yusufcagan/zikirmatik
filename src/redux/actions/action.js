@@ -25,3 +25,33 @@ export function countNum(num) {
         payload: num
     }
 }
+
+export function removeZikir(id) {
+    return {
+        type: "DELETE_ZIK",
+        payload: id
+    }
+}
+
+export function editNum(id) {
+    return {
+        type: "EDIT_ZIK",
+        payload: id,
+    }
+}
+
+export function editReset(id) {
+    return {
+        type: "EDIT_RESET",
+        payload: id,
+    }
+}
+
+export function editName(id, name, count) {
+    return {
+        type: "EDIT_NAME",
+        payload: id,
+        name: name,
+        count: count
+    }
+}
