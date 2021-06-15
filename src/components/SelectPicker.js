@@ -16,7 +16,7 @@ export default function SelectPicker({ val }) {
             onValueChange={passData}
         >
             <Picker.Item label="Hatim Seçiniz" value="0" />
-            <Picker.Item label="Ayetel Kürsi" value="1" />
+            <Picker.Item label="Ayetel Kürsi" value='1' />
             <Picker.Item label="Yasin" value="2" />
             <Picker.Item label="İhlas" value="3" />
             <Picker.Item label="Salavat" value="4" />
