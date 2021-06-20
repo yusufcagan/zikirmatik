@@ -17,7 +17,7 @@ export default function menu({ navigation, page }) {
                     style={{ height: height / 20, width: width / 8, resizeMode: 'contain', }}
                 />
             </TouchableOpacity>
-            <Text style={{ fontSize: 25, marginLeft: width / 8, fontWeight: 'bold' }}>{page}</Text>
+            <Text style={{ fontSize: height / 30, marginLeft: width / 8, fontWeight: 'bold' }}>{page}</Text>
         </View>
     )
 }

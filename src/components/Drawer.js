@@ -1,5 +1,4 @@
 import React from 'react'
-import { View, Text } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../Screens/HomeScreen';
 import MyPlans from '../Screens/myplans';
@@ -8,7 +7,6 @@ import Hatim from '../Screens/hatimCalculation';
 import Settings from '../Screens/settings';
 import ContinueZikir from '../Screens/continueZikir'
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
 
 const drawer = createDrawerNavigator();
 const stack = createStackNavigator();
@@ -30,7 +28,7 @@ export default function Drawer() {
 
     return (
         <drawer.Navigator drawerType='slide'
-            drawerStyle={{ backgroundColor: '#373737' }}
+            drawerStyle={{ backgroundColor: '#5B6A69' }}
             drawerContentOptions={{
                 activeTintColor: 'green',
                 activeBackgroundColor: 'grey',
@@ -39,9 +37,9 @@ export default function Drawer() {
             overlayColor='grey'>
             <drawer.Screen name="Anasayfa" component={HomeScreen} />
             <drawer.Screen name="Zikirlerim" component={myStack} />
-            <drawer.Screen name="Planlarım" component={MyPlans} />
+            {/* <drawer.Screen name="Planlarım" component={MyPlans} /> */}
             <drawer.Screen name="Hatim Hesaplama" component={Hatim} />
-            <drawer.Screen name="Ayarlar" component={Settings} />
+            {/* <drawer.Screen name="Ayarlar" component={Settings} /> */}
         </drawer.Navigator >
     )
 }

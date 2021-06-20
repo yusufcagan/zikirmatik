@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Dimensions, TouchableOpacity, Image, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, Dimensions, TouchableOpacity, Image, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
 import { DrawerActions } from '@react-navigation/native';
 import MenuBut from '../components/menu';
 import SelectPicker from '../components/SelectPicker';
+import { PublisherBanner } from 'react-native-admob'
 
 const { width, height } = Dimensions.get('window');
 
@@ -83,7 +84,7 @@ function hatim({ navigation }) {
                         return <Text style={styles.textstyle}>{num - (100 - ihlasSecond())} kişi {ihlasFirst()}, geriye kalanlar {ihlasFirst() + 1} okuyacak.</Text>
                     }
                     else {
-                        return <Text style={styles.textstyle}> {100 - ihlasSecond()} kişi {ihlasFirst() + 1}, geriyekalanlar {ihlasFirst()} okuyacak. </Text>
+                        return <Text style={styles.textstyle}> {100 - ihlasSecond()} kişi {ihlasFirst() + 1}, geriye kalanlar {ihlasFirst()} okuyacak. </Text>
                     }
 
                 }
@@ -93,34 +94,47 @@ function hatim({ navigation }) {
 
     return (
 
-        <View style={{ flex: 1, backgroundColor: '#373737', width: width, height: height }}>
-            <MenuBut page={page} navigation={navigation} />
-            <Text style={{ fontSize: 17, marginLeft: width / 20 }}></Text>
-            <SelectPicker val={value => sethatim(value)} />
+        <View style={{ flex: 1, backgroundColor: '#5B6A69', width: width, height: height }}>
+            <ScrollView>
+                <MenuBut page={page} navigation={navigation} />
+                <Text style={{ fontSize: 17, marginLeft: width / 20 }}></Text>
+                <SelectPicker val={value => sethatim(value)} />
 
+                <View
+                    style={styles.textwiev}>
+                    <TextInput
+                        placeholder='Kaç kişi olduğunu yazınız'
+                        keyboardType='numeric'
+                        style={{ marginLeft: 10, fontSize: height / 60 }}
+                        value={String(num)}
+                        onChangeText={(val) => setnum(val)}>
+
+                    </TextInput>
+                </View>
+
+                <TouchableOpacity
+                    style={styles.button3}
+                    onPress={() => setBool(true)}>
+                    <Text style={{ fontSize: height / 32, textAlign: 'center', fontWeight: 'bold' }}>Hesapla</Text>
+                </TouchableOpacity>
+                <View
+                    style={styles.textwiev2}>
+
+                    {bool === true ? renderSwitchCase(hatim) : null}
+
+                </View>
+            </ScrollView>
             <View
-                style={styles.textwiev}>
-                <TextInput
-                    placeholder='Kaç kişi olduğunu yazınız'
-                    keyboardType='numeric'
-                    style={{ marginLeft: 10 }}
-                    value={String(num)}
-                    onChangeText={(val) => setnum(val)}>
-
-                </TextInput>
+                style={{ alignItems: 'center' }}>
+                <PublisherBanner
+                    adSize="banner"
+                    adUnitID="ca-app-pub-3940256099942544/6300978111"
+                    testDevices={[PublisherBanner.simulatorId]}
+                    onAdFailedToLoad={error => console.error(error)}
+                    onAppEvent={event => console.log(event.name, event.info)}
+                />
             </View>
 
-            <TouchableOpacity
-                style={styles.button3}
-                onPress={() => setBool(true)}>
-                <Text style={{ fontSize: 25, textAlign: 'center', fontWeight: 'bold' }}>Hesapla</Text>
-            </TouchableOpacity>
-            <View
-                style={styles.textwiev2}>
-
-                {bool === true ? renderSwitchCase(hatim) : null}
-
-            </View>
         </View>
 
     )
@@ -144,7 +158,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     button3: {
-        backgroundColor: '#6A886C',
+        backgroundColor: '#4B4A4A',
         height: height / 18,
         width: width / 2,
         borderRadius: 20,
@@ -153,7 +167,7 @@ const styles = StyleSheet.create({
 
     },
     textstyle: {
-        fontSize: 18,
+        fontSize: height / 35,
         marginLeft: 8
     },
 })

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { View, Text, Modal, TouchableOpacity, StyleSheet, TextInput, Dimensions } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, StyleSheet, TextInput, Dimensions, Image, Alert } from 'react-native'
 import { addkey, addZikir, resetNum } from '../redux/actions/action';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { AdMobInterstitial } from 'react-native-admob'
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,6 +20,36 @@ export default function zModal({ modal, exit }) {
 
     const zcount = n4.toString() + n3.toString() + n2.toString() + n1.toString();
 
+    const save = () => {
+        if (!name) {
+            Alert.alert(
+                "Uyarı",
+                "Lütfen bir zikir ismi yazınız.",
+                [
+                    {
+                        text: "Tamam",
+                        //onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+
+                ]
+            )
+        }
+        else {
+            dispatch(addZikir({
+                key: zkey,
+                name: name,
+                zikcount: parseInt(zcount)
+            }));
+            setname('');
+            dispatch(addkey());
+            dispatch(resetNum());
+            // AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
+            // AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+            // AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+            exit();
+        }
+    }
 
     return (
         <Modal
@@ -29,32 +60,24 @@ export default function zModal({ modal, exit }) {
                     <TouchableOpacity
                         style={styles.ex}
                         onPress={exit}>
-                        <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 22 }}>X</Text>
+                        <Image
+                            source={require('../../image/remove.png')}
+                            style={{ height: height / 25, width: width / 14, resizeMode: 'contain', marginLeft: 5 }} />
                     </TouchableOpacity>
                     <View style={styles.textinput}>
                         <TextInput
-                            style={{ marginLeft: width / 40 }}
+                            style={{ marginLeft: width / 40, fontSize: height / 50 }}
                             placeholder="Zikir Adını Giriniz"
                             value={name}
                             onChangeText={(val) => setname(val)}
                         ></TextInput>
                     </View>
                     <TouchableOpacity
-                        style={styles.button3}
-                        onPress={() => {
-                            dispatch(addZikir({
-                                key: zkey,
-                                name: name,
-                                zikcount: parseInt(zcount)
-                            }));
-                            setname('');
-                            dispatch(addkey());
-                            dispatch(resetNum());
-                            exit();
-                        }}
+                        style={styles.buttonAdd}
+                        onPress={save}
                     >
 
-                        <Text style={{ fontSize: 25, textAlign: 'center', fontWeight: 'bold' }}>Ekle</Text>
+                        <Text style={{ fontSize: height / 32, textAlign: 'center', fontWeight: 'bold' }}>Ekle</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -75,7 +98,6 @@ const styles = StyleSheet.create({
 
     },
     ex: {
-        backgroundColor: 'red',
         height: height / 25,
         width: height / 25,
         borderRadius: 80,
@@ -87,12 +109,12 @@ const styles = StyleSheet.create({
     modal: {
         width: width * 12 / 15,
         height: height / 3,
-        backgroundColor: '#545E54',
+        backgroundColor: '#4E5555',
         borderRadius: 25,
         alignItems: 'center'
     },
-    button3: {
-        backgroundColor: '#6A886C',
+    buttonAdd: {
+        backgroundColor: '#4B4A4A',
         height: height / 18,
         width: width / 2,
         borderRadius: 20,

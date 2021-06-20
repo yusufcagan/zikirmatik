@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get('window');
 function settings({ navigation }) {
     const page = 'Ayarlar'
     return (
-        <View style={{ flex: 1, backgroundColor: '#373737', width: width, height: height }}>
+        <View style={{ flex: 1, backgroundColor: '#5B6A69', width: width, height: height }}>
             <MenuBut page={page} navigation={navigation} />
             <Text></Text>
         </View>

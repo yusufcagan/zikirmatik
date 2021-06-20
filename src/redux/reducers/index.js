@@ -1,4 +1,3 @@
-
 const initialState = {
     zik: [],
     keyid: 1,
@@ -6,6 +5,7 @@ const initialState = {
     n2: 0,
     n3: 0,
     n4: 0,
+    vibBoolean: true,
 }
 
 
@@ -54,6 +54,7 @@ const reducer = (state = initialState, action) => {
                         return {
                             ...item,
                             zikcount: item.zikcount + 1
+
                         };
                     }
                     else {
@@ -75,6 +76,20 @@ const reducer = (state = initialState, action) => {
                     }
                 })
             }
+        case 'EDIT_UNDOZIK':
+            return {
+                ...state, zik: state.zik.map(item => {
+                    if (item.key === action.payload) {
+                        return {
+                            ...item,
+                            zikcount: item.zikcount - 1
+                        }
+                    }
+                    else {
+                        return item;
+                    }
+                })
+            }
         case 'EDIT_NAME':
             return {
                 ...state, zik: state.zik.map(item => {
@@ -90,6 +105,30 @@ const reducer = (state = initialState, action) => {
                     }
                 })
             }
+        case 'UNDO_ZIK':
+            if (state.n1 == 0) {
+                if (state.n2 == 0) {
+                    if (state.n3 == 0) {
+                        if (state.n4 == 0) {
+                            return { ...state, n1: 0, n2: 0, n3: 0, n4: 0 }
+                        }
+                        else {
+                            return { ...state, n1: 9, n2: 9, n3: 9, n4: state.n4 - 1 }
+                        }
+                    }
+                    else {
+                        return { ...state, n1: 9, n2: 9, n3: state.n3 - 1 }
+                    }
+                }
+                else {
+                    return { ...state, n1: 9, n2: state.n2 - 1 }
+                }
+            }
+            else {
+                return { ...state, n1: state.n1 - 1 }
+            }
+        case 'TURN_BOOL':
+            return { ...state, vibBoolean: !state.vibBoolean }
         default:
             return state;
 

@@ -40,6 +40,13 @@ export function editNum(id) {
     }
 }
 
+export function editUndoNum(id) {
+    return {
+        type: "EDIT_UNDOZIK",
+        payload: id,
+    }
+}
+
 export function editReset(id) {
     return {
         type: "EDIT_RESET",
@@ -53,5 +60,18 @@ export function editName(id, name, count) {
         payload: id,
         name: name,
         count: count
+    }
+}
+
+export function undo(num) {
+    return {
+        type: "UNDO_ZIK",
+        payload: num
+    }
+}
+export function turnBool(vib) {
+    return {
+        type: 'TURN_BOOL',
+        payload: vib
     }
 }
