@@ -1,4 +1,20 @@
 {
-  "name": "zikirmatik",
-  "displayName": "zikirmatik"
+  "name": "Zikirmatik",
+  "displayName": "Zikirmatik",
+  "slug": "zikirmatik",
+  "owner": "yusufcagann",
+  "extra": {
+    "eas": {
+      "projectId": "9b2a976a-79bf-4005-aa51-d0c1abf8dd56"
+    }
+  },
+  "runtimeVersion": "1.1.0",
+  "updates": {
+    "url": "https://u.expo.dev/9b2a976a-79bf-4005-aa51-d0c1abf8dd56",
+    "requestHeaders": {
+      "expo-channel-name": "production"
+    }
+  },
+  "android": {},
+  "ios": {}
 }
